@@ -30,31 +30,54 @@ class Solution():
         self.path_output = pathout
 
     def init_Sol(self):
-        x = []
-        k_x = {}
-        for i in range(self.K):
-            k_x[i] = []
-        
-        for i in range(self.N):
-            random_number = random.randint(0, self.K - 1)
-            x.append(random_number)
-            k_x[random_number] = k_x[random_number] + [i]
-        
-        self.x = x
-        self.k_x = k_x
+        def tim_x(self):
+            x = []
+            k_x = {}
+            for i in range(self.K):
+                k_x[i] = []
+            
+            for i in range(self.N):
+                random_number = random.randint(0, self.K - 1)
+                x.append(random_number)
+                k_x[random_number] = k_x[random_number] + [i]
+            
+            return x, k_x
 
-        y = []
-        k_y = {}
-        for i in range(self.K):
-            k_y[i] = []
+        def tim_y(self, x):
+            y = []
+            k_y = {}
+            for i in range(self.K):
+                k_y[i] = []
 
-        for i in range(self.M):
-            random_number = random.randint(0, self.K - 1)
-            y.append(random_number)
-            k_y[random_number] = k_y[random_number] + [i]
-        
-        self.k_y = k_y
-        self.y = y
+            for gv in range(self.M):#gv i hoi dong nao
+                while(1):
+                    HD_gv = random.randint(0, self.K - 1)
+                    for DA_i in range(self.N):
+                        if self.t[DA_i] - 1 == gv:
+                            if HD_gv == x[DA_i]:
+                                continue
+                            else:
+                                break
+                        else:
+                            break
+                    return False, None, None
+                
+                y.append(HD_gv)
+                k_y[HD_gv] = k_y[HD_gv] + [gv]
+
+            return True, y, k_y
+
+        while(1):
+
+            x, k_x = tim_x(self)
+            suc, y, k_y = tim_y(self, x) 
+            if suc:
+                print("ok")
+                self.x = x
+                self.k_x = k_x
+                self.k_y = k_y
+                self.y = y
+                break
 
     def rang_buoc(self)->bool:
         # RB1
