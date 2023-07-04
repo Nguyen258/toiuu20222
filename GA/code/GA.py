@@ -69,7 +69,7 @@ class Ga():
         while(len(childs_return) < len(self.expulsion_set)):
             current_time = time.time()  # Lấy thời gian hiện tại
             elapsed_time = current_time - start_time  # Tính thời gian đã trôi qua
-            if elapsed_time >= 10:  # Kiểm tra nếu đã đạt đến thời gian kết thúc (ví dụ: 60 giây - 1 phút)
+            if elapsed_time >= 20:  # Kiểm tra nếu đã đạt đến thời gian kết thúc (ví dụ: 60 giây - 1 phút)
                 for hi in self.expulsion_set:
                     sol_new = copy.deepcopy(self.pop[hi])
                     childs_return.append(sol_new)
