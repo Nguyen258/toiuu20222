@@ -29,16 +29,16 @@ data = {}
 # data["Extra-large/input_50_24_16.txt"] = [50, 24, 16]
 
 # Data thầy:
-# data["Small/input1.txt"] = [6, 4, 2]
-# data["Small/input2.txt"] = [6, 4, 2]
-# data["Small/input3.txt"] = [6, 4, 2]
-# data["Small/input4.txt"] = [6, 4, 2]
-data["Small/input5.txt"] = [6, 4, 2]
-data["Small/input6.txt"] = [6, 4, 2]
-data["Small/input7.txt"] = [6, 4, 2]
-# data["Small/input8.txt"] = [6, 4, 2]
-# data["Small/input9.txt"] = [6, 4, 2]
-# data["Small/input10.txt"] = [6, 4, 2]
+# data["Data/input1.txt"] = [6, 4, 2]
+# data["Data/input2.txt"] = [6, 4, 2]
+# data["Data/input3.txt"] = [6, 4, 2]
+# data["Data/input4.txt"] = [6, 4, 2]
+data["Data/input5.txt"] = [6, 4, 2]
+data["Data/input6.txt"] = [6, 4, 2]
+data["Data/input7.txt"] = [6, 4, 2]
+# data["Data/input8.txt"] = [6, 4, 2]
+# data["Data/input9.txt"] = [6, 4, 2]
+# data["Data/input10.txt"] = [6, 4, 2]
 
 
 for file_name in data.keys():
