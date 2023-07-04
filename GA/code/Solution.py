@@ -16,6 +16,7 @@ class Solution():
         self.d = d
         self.e = e
         self.f = f
+
         
         self.x = None
         self.y = None
@@ -30,37 +31,57 @@ class Solution():
         self.path_output = pathout
 
     def init_Sol(self):
-        def tim_x(self):
-            x = []
-            k_x = {}
-            for i in range(self.K):
-                k_x[i] = []
-            
-            for i in range(self.N):
-                random_number = random.randint(0, self.K - 1)
-                x.append(random_number)
-                k_x[random_number] = k_x[random_number] + [i]
-            
-            return x, k_x
+        def gv_tranh_hd(self, x):
+            t = self.t
+            gv_hd = {}
+            for i in range(self.M):
+                gv_hd[i] = []
 
-        def tim_y(self, x):
+            for i in range(self.N):
+                gv = t[i] - 1
+                hd = x[i]
+                gv_hd[gv] = gv_hd[gv] +[hd]
+            
+            for i in range(self.M):
+                tmp = set(gv_hd[i])
+                gv_hd[i] = tmp 
+                if len(tmp) == self.K:
+                    return False, None
+                if len(tmp) == 0:
+                    return False, None
+            return True, gv_hd
+                
+
+        def tim_x(self):
+            while(1):
+                x = []
+                k_x = {}
+                for i in range(self.K):
+                    k_x[i] = []
+                
+                for i in range(self.N):
+                    random_number = random.randint(0, self.K - 1)
+                    x.append(random_number)
+                    k_x[random_number] = k_x[random_number] + [i]
+                check, gvhd = gv_tranh_hd(self, x)
+                if check:
+                    return x, k_x, gvhd
+                else:
+                    continue
+
+        def tim_y(self, x, gvhd):
             y = []
             k_y = {}
             for i in range(self.K):
                 k_y[i] = []
 
             for gv in range(self.M):#gv i hoi dong nao
-                while(1):
-                    HD_gv = random.randint(0, self.K - 1)
-                    for DA_i in range(self.N):
-                        if self.t[DA_i] - 1 == gv:
-                            if HD_gv == x[DA_i]:
-                                continue
-                            else:
-                                break
-                        else:
-                            break
-                    return False, None, None
+                chon_gv_in = []
+                for i in range(self.K):
+                    if i in gvhd[gv]:continue
+                    chon_gv_in.append(i)
+
+                HD_gv = random.choice(chon_gv_in)
                 
                 y.append(HD_gv)
                 k_y[HD_gv] = k_y[HD_gv] + [gv]
@@ -68,16 +89,15 @@ class Solution():
             return True, y, k_y
 
         while(1):
-
-            x, k_x = tim_x(self)
-            suc, y, k_y = tim_y(self, x) 
+            x, k_x, gvhd = tim_x(self)
+            suc, y, k_y = tim_y(self, x, gvhd) 
             if suc:
-                print("ok")
                 self.x = x
                 self.k_x = k_x
                 self.k_y = k_y
                 self.y = y
                 break
+
 
     def rang_buoc(self)->bool:
         # RB1
