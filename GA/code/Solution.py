@@ -76,8 +76,7 @@ class Solution():
         # RB5 do tuong dong GV&DA
         if not self._GV_and_DA():
             return False
-        
-        self.dotuongdong = self._do_tuong_dong_giua_cac_do_an + self._do_tuong_dong_giua_do_an_va_giao_vien
+        self.dotuongdong = self._do_tuong_dong_giua_cac_do_an/2 + self._do_tuong_dong_giua_do_an_va_giao_vien
         return True
     
     def tinhk_xy(self):
@@ -100,19 +99,20 @@ class Solution():
 
 
     def _DA_and_DA(self):
-        self._do_tuong_dong_giua_cac_do_an = 0
+        do_tuong_dong_giua_cac_do_an = 0
         for xs in self.k_x.values():
             for DA1 in xs:
                 for DA2 in xs:
                     if DA1 == DA2: continue
                     if self.s[DA1][DA2] < self.e:
                         return False
-                    else:
-                        self._do_tuong_dong_giua_cac_do_an += self.s[DA1][DA2]
+                    else:     
+                        do_tuong_dong_giua_cac_do_an += self.s[DA1][DA2]
+        self._do_tuong_dong_giua_cac_do_an = do_tuong_dong_giua_cac_do_an
         return True
     
     def _GV_and_DA(self):
-        self._do_tuong_dong_giua_do_an_va_giao_vien = 0
+        do_tuong_dong_giua_do_an_va_giao_vien = 0
         for k in range(self.K):
             for GV in self.k_y[k]:
                 for DA in self.k_x[k]:
@@ -120,5 +120,6 @@ class Solution():
                         print(GV,DA)
                         return False
                     else:
-                        self._do_tuong_dong_giua_do_an_va_giao_vien += self.g[DA][GV]
+                        do_tuong_dong_giua_do_an_va_giao_vien += self.g[DA][GV]
+        self._do_tuong_dong_giua_do_an_va_giao_vien = do_tuong_dong_giua_do_an_va_giao_vien
         return True

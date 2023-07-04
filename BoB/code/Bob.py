@@ -122,7 +122,6 @@ class Bob():
             for GV in self.k_y[k]:
                 for DA in self.k_x[k]:
                     if self.g[DA][GV] < self.f:
-                        print(GV,DA)
                         return False
                     else:
                         self._do_tuong_dong_giua_do_an_va_giao_vien += self.g[DA][GV]
