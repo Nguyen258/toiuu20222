@@ -5,7 +5,7 @@ from Solution import *
 data = {}
 # Small
 # data["Small/input_6_4_2.txt"] = [6, 4, 2]
-# data["Small/input_8_4_3.txt"] = [8, 4, 3]
+data["Small/input_8_4_3.txt"] = [8, 4, 3]
 # data["Small/input_10_4_3.txt"] = [10, 4, 3]
 # data["Small/input_10_6_3.txt"] = [10, 6, 3]
 # data["Small/input_12_6_4.txt"] = [12, 6, 4]
@@ -14,7 +14,7 @@ data = {}
 # data["Medium/input_14_8_4.txt"] = [14, 8, 4]
 # data["Medium/input_14_10_5.txt"] = [14, 10, 5]
 # data["Medium/input_16_10_6.txt"] = [16, 10, 6]
-data["Medium/input_16_12_6.txt"] = [16, 12, 6]
+# data["Medium/input_16_12_6.txt"] = [16, 12, 6]
 # # Large
 # data["Large/input_18_12_6.txt"] = [18, 12, 6]
 # data["Large/input_18_14_8.txt"] = [18, 14, 8]

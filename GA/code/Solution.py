@@ -46,8 +46,12 @@ class Solution():
                 tmp = set(gv_hd[i])
                 gv_hd[i] = tmp 
                 if len(tmp) == self.K:
+                    # print(x)
                     return False, None
                 if len(tmp) == 0:
+                    print(x)
+                    print(i)
+                    print(gv_hd)
                     return False, None
             return True, gv_hd
                 
