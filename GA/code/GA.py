@@ -112,7 +112,7 @@ class Ga():
         while(len(self.pop) <= self.n_pop):
             current_time = time.time()  # Lấy thời gian hiện tại
             elapsed_time = current_time - start_time  # Tính thời gian đã trôi qua
-            if elapsed_time >= 30:  # Kiểm tra nếu đã đạt đến thời gian kết thúc (ví dụ: 60 giây - 1 phút)
+            if elapsed_time >= 120:  # Kiểm tra nếu đã đạt đến thời gian kết thúc (ví dụ: 60 giây - 1 phút)
                 self.n_pop = len(self.pop)
                 self.remove = int(self.n_pop/3)
                 break  # Thoát khỏi vòng lặp

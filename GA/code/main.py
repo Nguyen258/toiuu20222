@@ -29,16 +29,16 @@ data = {}
 # data["Extra-large/input_50_24_16.txt"] = [50, 24, 16]
 
 # Data thầy:
-# data["Data/input1.txt"] = [6, 4, 2]
-# data["Data/input2.txt"] = [6, 4, 2]
-# data["Data/input3.txt"] = [6, 4, 2]
-# data["Data/input4.txt"] = [6, 4, 2]
-data["Data/input5.txt"] = [10, 4, 2]
-data["Data/input6.txt"] = [6, 4, 2]
-data["Data/input7.txt"] = [50, 15, 5]
-# data["Data/input8.txt"] = [6, 4, 2]
-# data["Data/input9.txt"] = [6, 4, 2]
-# data["Data/input10.txt"] = [6, 4, 2]
+# data["Data/input6.txt"] = [6, 4, 2]
+# data["Data/input5.txt"] = [10, 4, 2]
+# data["Data/input7.txt"] = [50, 15, 5]
+# data["Data/input8.txt"] = [100, 30, 10]
+# data["Data/input1.txt"] = [200, 50, 20]
+data["Data/input2.txt"] = [300, 50, 30]
+data["Data/input3.txt"] = [500, 100, 50]
+data["Data/input4.txt"] = [600, 150, 60]
+data["Data/input9.txt"] = [800, 200, 80]
+data["Data/input10.txt"] = [1000, 200, 100]
 
 
 for file_name in data.keys():
@@ -48,7 +48,7 @@ for file_name in data.keys():
     sol = Solution(input)
 
     N = 20
-    Gen = 100
+    Gen = 10
 
     ga = Ga(N, Gen, sol)
     ga.run()

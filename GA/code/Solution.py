@@ -17,7 +17,6 @@ class Solution():
         self.e = e
         self.f = f
 
-        
         self.x = None
         self.y = None
 
@@ -31,6 +30,33 @@ class Solution():
         self.path_output = pathout
 
     def init_Sol(self):
+        def tim_xx(self):
+            while(1):
+                stores = []
+                for i in range(self.N):
+                    stores.append(i)
+                x = [-1]*self.N
+                k_x = {}
+                for i in range(self.K):
+                    k_x[i] = []
+                    
+                for i in range(self.K):
+                    random_selection = random.sample(stores, self.b)
+                    for item in random_selection:
+                        stores.remove(item)
+                    
+                    k_x[i] = k_x[i] + random_selection
+
+                for key, value in k_x.items():
+                    for i in value:
+                        x[i] = key
+
+                check, gvhd = gv_tranh_hd(self, x)
+                if check:
+                    return x, k_x, gvhd
+                else:
+                    continue
+                
         def gv_tranh_hd(self, x):
             t = self.t
             gv_hd = {}
@@ -47,8 +73,6 @@ class Solution():
                 gv_hd[i] = tmp 
                 if len(tmp) == self.K:
                     return False, None
-                if len(tmp) == 0:
-                    return False, None
             return True, gv_hd
                 
 
@@ -63,13 +87,23 @@ class Solution():
                     random_number = random.randint(0, self.K - 1)
                     x.append(random_number)
                     k_x[random_number] = k_x[random_number] + [i]
+                    
+                max = 0
+                for _, value in k_x.items():
+                    if len(value) < self.a: continue
+                    if len(value) > max: max = len(value)
+
+                if max > self.b:
+                    print("nono")
+                    continue
+
                 check, gvhd = gv_tranh_hd(self, x)
                 if check:
                     return x, k_x, gvhd
                 else:
                     continue
 
-        def tim_y(self, x, gvhd):
+        def tim_y(self, gvhd):
             y = []
             k_y = {}
             for i in range(self.K):
@@ -86,12 +120,25 @@ class Solution():
                 y.append(HD_gv)
                 k_y[HD_gv] = k_y[HD_gv] + [gv]
 
+                for value in k_y.values():
+                    if len(value) < self.c: 
+                        return False, None, None
+                    if len(value) > self.d:
+                        return False, None, None
+
             return True, y, k_y
 
         while(1):
-            x, k_x, gvhd = tim_x(self)
-            suc, y, k_y = tim_y(self, x, gvhd) 
+            if self.b*self.K == self.N:
+                x, k_x, gvhd = tim_xx(self)
+                print("done1")
+            else:
+                x, k_x, gvhd = tim_x(self)
+
+            suc, y, k_y = tim_y(self, gvhd) 
+            print("done2")
             if suc:
+                print("pass")
                 self.x = x
                 self.k_x = k_x
                 self.k_y = k_y
@@ -103,22 +150,27 @@ class Solution():
         # RB1
         for so_DA in self.k_x.values():       
             if (len(so_DA) > self.b) or (len(so_DA) < self.a):
+                print("RB1")
                 return False
         # RB2
         for so_GV in self.k_y.values():       
             if (len(so_GV) > self.d) or (len(so_GV) < self.c):
+                print("RB2")
                 return False
         # RB3
         for i in range(self.N):
 
             if self.x[i] == self.y[self.t[i] - 1]:
+                print("RB3")
                 return False
             
         # RB4 do tuong dong DA&DA
         if not self._DA_and_DA():
+            print("RB4")
             return False
         # RB5 do tuong dong GV&DA
         if not self._GV_and_DA():
+            print("RB5")
             return False
         
         self.dotuongdong = self._do_tuong_dong_giua_cac_do_an/2 + self._do_tuong_dong_giua_do_an_va_giao_vien
