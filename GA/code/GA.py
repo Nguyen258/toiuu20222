@@ -119,6 +119,7 @@ class Ga():
 
             sol_init = copy.deepcopy(self.sol_sample)
             sol_init.init_Sol()
+            
             if (sol_init.rang_buoc()) and (self._sol_not_in_pop(sol_init)):
                 self.pop.append(sol_init)
             else:
