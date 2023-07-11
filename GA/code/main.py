@@ -34,11 +34,11 @@ data = {}
 # data["Data/input7.txt"] = [50, 15, 5]
 # data["Data/input8.txt"] = [100, 30, 10]
 # data["Data/input1.txt"] = [200, 50, 20]
-data["Data/input2.txt"] = [300, 50, 30]
+# data["Data/input2.txt"] = [300, 50, 30]
 # data["Data/input3.txt"] = [500, 100, 50]
 # data["Data/input4.txt"] = [600, 150, 60]
 # data["Data/input9.txt"] = [800, 200, 80]
-# data["Data/input10.txt"] = [1000, 200, 100]
+data["Data/input10.txt"] = [1000, 200, 100]
 
 
 for file_name in data.keys():
