@@ -9,6 +9,8 @@ BTL gồm 4 giải thuật:
 
 4, Bob
 
+Cách chạy: "python3 Bob/code/main.go" thay thế các giải thuật tương ứng
+
 Dữ liệu nằm trong file Dataset/Small/input_6_4_2.txt (tương tự với các bộ dữ liệu khác):
 
 dòng đầu tiên gồm 3 số nguyên N, M, K

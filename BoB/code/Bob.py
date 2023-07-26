@@ -54,13 +54,29 @@ class Bob():
                     self.x_good = self.x
                     self.y_good = self.y
         else:
-            current_time = time.time() 
-            if current_time - self.time_start > 600:
-                return
+            for i in range(self.K):
+                a[t] = i
+                if self.check(a, t):continue
+                else: self.try_bob(a, t+1)
+    def check(self, a, t):
+        k_x = [0]*self.K
+        k_y = [0]*self.K
+        n = 0
+        check = 0
+        for i in range(t+1):
+            n+=1
+            if n <= self.N:
+                k_x[a[i]] +=1
+                if k_x[a[i]] > self.b:
+                    check = 1
             else:
-                for i in range(self.K):
-                    a[t] = i
-                    self.try_bob(a, t+1)
+                k_y[a[i]] +=1
+                if k_y[a[i]] > self.d:
+                    check = 1
+                
+        return check == 1
+        
+        
 
     def tinhk_xy(self):
         k_x = {}
