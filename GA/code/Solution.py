@@ -45,50 +45,43 @@ class Solution():
         self.gv_hd = gv_hd
 
     def init_Sol(self):
-        print("start")
+        # print("start")
         # khoi tao k_y
-        k_y = {}
-        for i in range(self.K):
-            k_y[i] =[]
+        def TimY(self):
+            k_y = {}
+            for i in range(self.K):
+                k_y[i] =[]
 
-        gv_tmp = [gv for gv in range(self.M)] 
-        # moi hoi dong chonj ngau nhien mot gv
-        for k in range(self.K):
-            ran = random.choice(gv_tmp)
-            k_y[k] = k_y[k] + [ran]
-            gv_tmp.remove(ran)
-        # chia cac gv con lai vao hd khong vuot qua d
-        for k in range(self.K):
-            tmp_k = []
+            gv_tmp = [gv for gv in range(self.M)] 
+            # moi hoi dong chonj ngau nhien mot gv
+            for k in range(self.K):
+                ran = random.choice(gv_tmp)
+                k_y[k] = k_y[k] + [ran]
+                gv_tmp.remove(ran)
+            # chia cac gv con lai vao hd khong vuot qua d
+            for k in range(self.K):
+                tmp_k = []
 
-            if k == self.K - 1:
-                for i in range(len(gv_tmp)):
+                if k == self.K - 1:
+                    for i in range(len(gv_tmp)):
+                        rand_ = random.choice(gv_tmp)
+                        tmp_k.append(rand_)
+                        gv_tmp.remove(rand_)
+                    k_y[k] = k_y[k] + tmp_k
+                    break
+
+                rand_sl = random.randint(0, min(self.d - 1, len(gv_tmp)))
+                
+                for i in range(rand_sl):
                     rand_ = random.choice(gv_tmp)
                     tmp_k.append(rand_)
                     gv_tmp.remove(rand_)
+
                 k_y[k] = k_y[k] + tmp_k
-                break
+            return k_y
 
-            rand_sl = random.randint(0, min(self.d - 1, len(gv_tmp)))
-            
-            for i in range(rand_sl):
-                rand_ = random.choice(gv_tmp)
-                tmp_k.append(rand_)
-                gv_tmp.remove(rand_)
-
-            k_y[k] = k_y[k] + tmp_k
-        
-        print("kyy",k_y)
-        gv_in_hd = [-1]*self.M
-
-        for i in range(self.K):
-            for j in k_y[i]:
-                gv_in_hd[j] = i
-
-        print("gv_in_hd",gv_in_hd)
-
-
-        def timK_X(self, gv_in_hd):
+        def timK_X(self, gv_in_hd, dosau):
+            # print(gv_in_hd)
             k_x = {}
             for i in range(self.K):
                 k_x[i] = []
@@ -99,30 +92,48 @@ class Solution():
                 hd_dont_in =  gv_in_hd[gvhd]
                 
                 hdcan = [hd for hd in range(self.K)]
-                print(gvhd)
-                print(hd_dont_in)
-                print("sss",hdcan)
+                # print(gvhd)
+                # print(hd_dont_in)
+                # print("sss",hdcan)
                 hdcan.remove(hd_dont_in)
                 da_can_hd[i] = hdcan
             
             
             hd_con = [self.b]*self.K
-            
             for i in range(self.N):
 
                 for j in range(self.K):
                     if (hd_con[j] == 0) and (j in da_can_hd[i]) :  da_can_hd[i].remove(j)    
 
 
-                if da_can_hd[i] == []: return timK_X(self, gv_in_hd)
+                if da_can_hd[i] == []: 
+                    dosau +=1
+                    if dosau >100: return None, False
+                    return timK_X(self, gv_in_hd, dosau)
+                    
 
                 hd = random.choice(da_can_hd[i])
                 k_x[hd] = k_x[hd] + [i]
                 hd_con[hd] -=  1
 
-            return k_x
+            return k_x, True
+        
+        while(1):
+            k_y = TimY(self)
+            # print("kyy",k_y)
+            gv_in_hd = [-1]*self.M
 
-        k_x = timK_X(self, gv_in_hd)
+            for i in range(self.K):
+                for j in k_y[i]:
+                    gv_in_hd[j] = i
+
+            # print("gv_in_hd",gv_in_hd)
+
+            k_x, suc = timK_X(self, gv_in_hd, 0)
+
+            if suc == False:continue
+            else: break
+
         self.k_x = k_x
         self.k_y = k_y
         x = [-1]*self.N
@@ -142,27 +153,27 @@ class Solution():
         # RB1
         for so_DA in self.k_x.values():       
             if (len(so_DA) > self.b) or (len(so_DA) < self.a):
-                print("RB1")
+                # print("RB1")
                 return False
         # RB2
         for so_GV in self.k_y.values():       
             if (len(so_GV) > self.d) or (len(so_GV) < self.c):
-                print("RB2")
+                # print("RB2")
                 return False
         # RB3
         for i in range(self.N):
 
             if self.x[i] == self.y[self.t[i] - 1]:
-                print("RB3")
+                # print("RB3")
                 return False
             
         # RB4 do tuong dong DA&DA
         if not self._DA_and_DA():
-            print("RB4")
+            # print("RB4")
             return False
         # RB5 do tuong dong GV&DA
         if not self._GV_and_DA():
-            print("RB5")
+            # print("RB5")
             return False
         
         self.dotuongdong = self._do_tuong_dong_giua_cac_do_an/2 + self._do_tuong_dong_giua_do_an_va_giao_vien

@@ -11,7 +11,8 @@ class Ga():
         self.Gen = Gen
         self.n_pop = N
         self.remove = int(N/3)
-        self.mutation_rate = 0.8
+        self.mutation_rate = 0.1
+        self.hybridization_rate = 0.5
 
         self.pop = []
         self.fitness = []
@@ -47,16 +48,20 @@ class Ga():
             if i in self.expulsion_set:continue
             for j in range(i, self.n_pop):
                 if j in self.expulsion_set:continue
-                child_tmp, suc = self._laighep(i,j)
-                if suc:
-                    child = child + child_tmp
+                random_number = random.random()
+                if random_number < self.hybridization_rate:
+                    child_tmp, suc = self._laighep(i,j)
+                    if suc:
+                        child = child + child_tmp
 
         # dot bien
         for i in range(self.n_pop):
             if i in self.expulsion_set:continue
-            child_tmp2, suc = self._dotbien(i)
-            if suc:
-                child = child + [child_tmp2]
+            random_number = random.random()
+            if random_number < self.mutation_rate:
+                child_tmp2, suc = self._dotbien(i)
+                if suc:
+                    child = child + [child_tmp2]
         # trung
         childs_return = []
         for chi in child:
@@ -112,7 +117,7 @@ class Ga():
         while(len(self.pop) <= self.n_pop):
             current_time = time.time()  # Lấy thời gian hiện tại
             elapsed_time = current_time - start_time  # Tính thời gian đã trôi qua
-            if elapsed_time >= 120:  # Kiểm tra nếu đã đạt đến thời gian kết thúc (ví dụ: 60 giây - 1 phút)
+            if elapsed_time >= 10:  # Kiểm tra nếu đã đạt đến thời gian kết thúc (ví dụ: 60 giây - 1 phút)
                 self.n_pop = len(self.pop)
                 self.remove = int(self.n_pop/3)
                 break  # Thoát khỏi vòng lặp
@@ -134,17 +139,31 @@ class Ga():
 
         parent2_x = copy.deepcopy(self.pop[sol2_id].x)
         parent2_y = copy.deepcopy(self.pop[sol2_id].y)
-
-        # Chọn một điểm cắt ngẫu nhiên
-        crossover_point = random.randint(1, len(parent1_x)-1)
         
         # Lai ghép chuỗi gen từ cha mẹ
-        child1_x = parent1_x[:crossover_point] + parent2_x[crossover_point:]
-        child1_y = parent1_y[:crossover_point] + parent2_y[crossover_point:]
-        
-        child2_x = parent2_x[:crossover_point] + parent1_x[crossover_point:]
-        child2_y = parent2_y[:crossover_point] + parent1_y[crossover_point:]
+        child1_x = []
+        child1_y = []
+        child2_x = []
+        child2_y = []
+        for i in range(len(parent1_x)):
+            random_number = random.random()
+            if random_number > 0.5:    
+                child1_x.append(parent1_x[i])
+                child2_x.append(parent2_x[i])
+            else:
+                child1_x.append(parent2_x[i])
+                child2_x.append(parent1_x[i])
 
+        for i in range(len(parent1_y)):
+            random_number = random.random()
+            if random_number > 0.5:  
+                child1_y.append(parent1_y[i])
+                child2_y.append(parent2_y[i])
+            else:
+                child1_y.append(parent2_y[i])
+                child2_y.append(parent1_y[i])
+
+        # create
         sol_child1 = copy.deepcopy(self.sol_sample)
         sol_child2 = copy.deepcopy(self.sol_sample)
 
@@ -170,14 +189,12 @@ class Ga():
         mutated_y = copy.deepcopy(self.pop[sol_id].y)
         
         for i in range(len(mutated_x)):
-            if random.random() < self.mutation_rate:
-                random_number = random.randint(0, self.sol_sample.K -1)
-                mutated_x[i] = random_number  # Đột biến bit i của gen x
+            random_number = random.randint(0, self.sol_sample.K -1)
+            mutated_x[i] = random_number  # Đột biến bit i của gen x
 
             if i < len(mutated_y):
-                if random.random() < self.mutation_rate:
-                    random_number = random.randint(0, self.sol_sample.K -1)
-                    mutated_y[i] = random_number  # Đột biến bit i của gen y
+                random_number = random.randint(0, self.sol_sample.K -1)
+                mutated_y[i] = random_number  # Đột biến bit i của gen y
                 
         sol_child = copy.deepcopy(self.sol_sample)
         sol_child.x = mutated_x

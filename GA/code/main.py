@@ -30,8 +30,8 @@ data = {}
 
 # Data thầy:
 # data["Data/input6.txt"] = [6, 4, 2]
-data["Data/input5.txt"] = [10, 4, 2]
-# data["Data/input7.txt"] = [50, 15, 5]
+# data["Data/input5.txt"] = [10, 4, 2]
+data["Data/input7.txt"] = [50, 15, 5]
 # data["Data/input8.txt"] = [100, 30, 10]
 # data["Data/input1.txt"] = [200, 50, 20]
 # data["Data/input2.txt"] = [300, 50, 30]
