@@ -5,9 +5,9 @@ BTL gồm 4 giải thuật:
 
 2, CP
 
-3, GA
+3, Bob
 
-4, Bob
+4, GA
 
 Cách chạy: "python3 Bob/code/main.go" thay thế các giải thuật tương ứng
 
